@@ -1,9 +1,9 @@
 TypedProperties
 ===============
 
-Java's java.util.Properties reads and writes the values as String.
+Java's java.util.Properties reads and writes values as String.
 
-This code aims at reading and writing values as strongly typed.
+This one aims at reading and writing strongly typed values.
 
 Currently the following types are supported:
  int, float, file and properties itself.
