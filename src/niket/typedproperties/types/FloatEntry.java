@@ -33,12 +33,12 @@ public final class FloatEntry implements Entry<Float> {
     }
 
     @Override
-    public String valToString(Float v) {
+    public String typeToString(Float v) {
         return String.valueOf(v);
     }
 
     @Override
-    public Float valToType(String v) {
+    public Float stringToType(String v) {
         return Float.parseFloat(v);
     }
 

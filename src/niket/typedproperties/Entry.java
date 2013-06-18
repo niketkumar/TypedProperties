@@ -12,7 +12,7 @@ public interface Entry<T> {
 
     public T getValue();
 
-    public String valToString(T v);
+    public String typeToString(T v);
 
-    public T valToType(String v);
+    public T stringToType(String v);
 }

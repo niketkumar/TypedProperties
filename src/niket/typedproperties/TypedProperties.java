@@ -42,10 +42,10 @@ public class TypedProperties {
     }
 
     public <T> T get(Entry<T> entry) {
-        return entry.valToType(properties.getProperty(entry.getName()));
+        return entry.stringToType(properties.getProperty(entry.getName()));
     }
 
     public <T> void set(Entry<T> entry) {
-        properties.setProperty(entry.getName(), entry.valToString(entry.getValue()));
+        properties.setProperty(entry.getName(), entry.typeToString(entry.getValue()));
     }
 }

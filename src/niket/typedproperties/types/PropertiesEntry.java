@@ -38,7 +38,7 @@ public class PropertiesEntry implements Entry<Properties> {
     }
 
     @Override
-    public String valToString(Properties v) {
+    public String typeToString(Properties v) {
         StringWriter stringWriter = new StringWriter();
         try {
             v.store(stringWriter, null);
@@ -49,7 +49,7 @@ public class PropertiesEntry implements Entry<Properties> {
     }
 
     @Override
-    public Properties valToType(String v) {
+    public Properties stringToType(String v) {
         if (null == v) return null;
         try {
             Properties p = new Properties();

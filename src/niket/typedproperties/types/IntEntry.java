@@ -33,12 +33,12 @@ public final class IntEntry implements Entry<Integer> {
     }
 
     @Override
-    public String valToString(Integer v) {
+    public String typeToString(Integer v) {
         return String.valueOf(v);
     }
 
     @Override
-    public Integer valToType(String v) {
+    public Integer stringToType(String v) {
         return Integer.parseInt(v);
     }
 

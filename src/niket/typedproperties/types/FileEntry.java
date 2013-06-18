@@ -35,12 +35,12 @@ public final class FileEntry implements Entry<File> {
     }
 
     @Override
-    public String valToString(File v) {
+    public String typeToString(File v) {
         return v.getAbsolutePath();
     }
 
     @Override
-    public File valToType(String v) {
+    public File stringToType(String v) {
         return new File(v);
     }
 
