@@ -6,33 +6,33 @@ Java's java.util.Properties reads and writes values as String.
 This one aims at reading and writing typed values.
 
 Currently the following types are supported:
- int, float, file and properties itself.
+ int, float, java.io.File and java.util.Properties itself.
 
-New types' support can be added by implementing underlying interface: niket.typedproperties.Entry<T>.
+New types' support can be added by implementing underlying interface: niket.typedproperties.Converter<T>.
 
 Usage:
 
-        TypedProperties p = new TypedProperties();
-        p.set(new IntEntry("count", 100));
-        p.set(new FloatEntry("salary", 2000.00f));
-        p.set(new FileEntry("hello.java", new File("helloworld.java")));
+                TypedProperties p2 = new TypedProperties();
+                p2.set("count", IntConverter.class, 100);
+                p2.set("salary", FloatConverter.class, 2000.00f);
+                p2.set("hello.java", FileConverter.class, new File("helloworld.java"));
 
-        ByteArrayOutputStream store = new ByteArrayOutputStream();
+                ByteArrayOutputStream store2 = new ByteArrayOutputStream();
 
-        p.store(store, "hello comments");
+                p2.store(store2, "hello comments");
 
-        System.out.println(store.toString());
+                System.out.println(store2.toString());
 
-        p.load(new ByteArrayInputStream(store.toByteArray()));
-        int x = p.get(new IntEntry("count"));
-        assert x == 100;
+                p2.load(new ByteArrayInputStream(store2.toByteArray()));
+                int x2 = p2.get("count", IntConverter.class);
+                assert x2 == 100;
 
-        float s = p.get(new FloatEntry("salary"));
-        assert s == 2000.00;
+                float s2 = p2.get("salary", FloatConverter.class);
+                assert s2 == 2000.00;
 
-        File f = p.get(new FileEntry("hello.java"));
-        assert f.equals(new File("helloworld.java"));
+                File f2 = p2.get("hello.java", FileConverter.class);
+                assert f2.equals(new File("helloworld.java"));
 
-        Properties props = p.get(new PropertiesEntry("helloProps"));
-        assert null == props;
+                Properties props2 = p2.get("helloProps", PropertiesConverter.class);
+                assert null == props2;
 
