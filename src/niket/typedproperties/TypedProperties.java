@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public class TypedProperties {
 
-    private final Properties properties;
+    protected final Properties properties;
 
     public TypedProperties() {
         properties = new Properties();
