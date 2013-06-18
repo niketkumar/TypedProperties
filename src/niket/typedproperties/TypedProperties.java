@@ -20,7 +20,6 @@ public class TypedProperties {
         properties = new Properties();
     }
 
-
     /**
      * Reads and loads the properties keys and corresponding values.
      *
@@ -41,11 +40,23 @@ public class TypedProperties {
         properties.store(toStream, comments);
     }
 
-    public <T> T get(Entry<T> entry) {
-        return entry.stringToType(properties.getProperty(entry.getName()));
+    public <T> T get(String name, Class<? extends Converter<T>> converterClass) {
+        try {
+            return converterClass.newInstance().stringToType(properties.getProperty(name));
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public <T> void set(Entry<T> entry) {
-        properties.setProperty(entry.getName(), entry.typeToString(entry.getValue()));
+    public <T> void set(String name, Class<? extends Converter<T>> converterClass, T value) {
+        try {
+            properties.setProperty(name, converterClass.newInstance().typeToString(value));
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

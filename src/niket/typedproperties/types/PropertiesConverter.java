@@ -1,6 +1,6 @@
 package niket.typedproperties.types;
 
-import niket.typedproperties.Entry;
+import niket.typedproperties.Converter;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -11,32 +11,10 @@ import java.util.Properties;
  * Created with IntelliJ IDEA.
  * User: niket
  * Date: 18/6/13
- * Time: 1:24 PM
+ * Time: 3:53 PM
  * To change this template use File | Settings | File Templates.
  */
-public class PropertiesEntry implements Entry<Properties> {
-    private final String name;
-    private Properties value;
-
-    public PropertiesEntry(String name) {
-        this.name = name;
-    }
-
-    public PropertiesEntry(String name, Properties value) {
-        this.name = name;
-        this.value = value;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Properties getValue() {
-        return value;
-    }
-
+public class PropertiesConverter implements Converter<Properties> {
     @Override
     public String typeToString(Properties v) {
         StringWriter stringWriter = new StringWriter();
@@ -58,6 +36,5 @@ public class PropertiesEntry implements Entry<Properties> {
         } catch (IOException e) {
             return null;
         }
-
     }
 }

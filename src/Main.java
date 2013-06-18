@@ -1,8 +1,8 @@
 import niket.typedproperties.TypedProperties;
-import niket.typedproperties.types.FileEntry;
-import niket.typedproperties.types.FloatEntry;
-import niket.typedproperties.types.IntEntry;
-import niket.typedproperties.types.PropertiesEntry;
+import niket.typedproperties.types.FileConverter;
+import niket.typedproperties.types.FloatConverter;
+import niket.typedproperties.types.IntConverter;
+import niket.typedproperties.types.PropertiesConverter;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,29 +12,29 @@ import java.util.Properties;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        TypedProperties p = new TypedProperties();
-        p.set(new IntEntry("count", 100));
-        p.set(new FloatEntry("salary", 2000.00f));
-        p.set(new FileEntry("hello.java", new File("helloworld.java")));
+    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
+        TypedProperties p2 = new TypedProperties();
+        p2.set("count", IntConverter.class, 100);
+        p2.set("salary", FloatConverter.class, 2000.00f);
+        p2.set("hello.java", FileConverter.class, new File("helloworld.java"));
 
-        ByteArrayOutputStream store = new ByteArrayOutputStream();
+        ByteArrayOutputStream store2 = new ByteArrayOutputStream();
 
-        p.store(store, "hello comments");
+        p2.store(store2, "hello comments");
 
-        System.out.println(store.toString());
+        System.out.println(store2.toString());
 
-        p.load(new ByteArrayInputStream(store.toByteArray()));
-        int x = p.get(new IntEntry("count"));
-        assert x == 100;
+        p2.load(new ByteArrayInputStream(store2.toByteArray()));
+        int x2 = p2.get("count", IntConverter.class);
+        assert x2 == 100;
 
-        float s = p.get(new FloatEntry("salary"));
-        assert s == 2000.00;
+        float s2 = p2.get("salary", FloatConverter.class);
+        assert s2 == 2000.00;
 
-        File f = p.get(new FileEntry("hello.java"));
-        assert f.equals(new File("helloworld.java"));
+        File f2 = p2.get("hello.java", FileConverter.class);
+        assert f2.equals(new File("helloworld.java"));
 
-        Properties props = p.get(new PropertiesEntry("helloProps"));
-        assert null == props;
+        Properties props2 = p2.get("helloProps", PropertiesConverter.class);
+        assert null == props2;
     }
 }
